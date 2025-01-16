@@ -1,1 +1,31 @@
+## What is a server?
+A server is a computer which provides other computers/clients with services resources or data.
 
+## What is the role of the domain name
+It is a readable address of the domain so humans don't have to remember the IP address and can just remember the domain name.
+
+## What type of DNS record www is in www.foobar.com
+typically it directly directs the user to the server with the corresponding IP address.
+
+## What is the role of the web server
+It is the entry point for http and https requests.
+It sends back static html's back.
+
+## What is the role of the application server
+The application server is dynamic so it can validate user input and update the database in the backend.
+
+## What is the role of the database
+The database is there to structure and save data for the frontend to use.
+
+## What is the server using to communicate with the computer of the user requesting the website
+The server uses http or https. Https is more secure so it is a better protocol to use.
+
+## SPOF
+SPOF or Single Point Of Failure means if the server the searched website is on goes down the whole website does go down.
+
+## Downtime when maintenance needed (like deploying new code web server needs to be restarted)
+During the downtime the website cannot be accessed. 
+The downtime is there for updating the website and its configurations.
+
+## Cannot scale if too much incoming traffic
+CPU, memory and bandwidth is the bottleneck so if too much traffic comes in it slows down the server response or can even cause the server to crash.
