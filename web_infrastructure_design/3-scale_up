@@ -1,0 +1,29 @@
+## For every additional element, why you are adding it
+1. One Server
+    Purpose: 
+        To split the components (web server, application server, and database) across dedicated servers, ensuring each server handles a specific workload.
+    Why Added: 
+        Improves performance by isolating tasks and avoiding resource contention between components. Each server can be optimized for its specific role.
+
+2. One Load Balancer (HAProxy) Configured as a Cluster
+    Purpose: 
+        To create a redundant load-balancing setup.
+    Why Added: 
+        Ensures high availability by clustering the new load balancer with the existing one. If one load balancer fails, the other can continue routing traffic seamlessly.
+
+3. Split Components Across Servers
+    Web Server (Nginx):
+        Purpose: 
+            Dedicated to serving static content and forwarding requests for dynamic content to the application server.
+        Why Added: 
+            Optimizes response times for static content and reduces load on other components.
+    Application Server:
+        Purpose: 
+            Handles backend business logic and processes dynamic requests.
+        Why Added: 
+            Improves performance by isolating computational tasks from the web server and database.
+    Database Server (MySQL):
+        Purpose: 
+            Manages all data storage and retrieval operations.
+        Why Added: 
+            Dedicated resources ensure efficient handling of database queries without interference from other services.
