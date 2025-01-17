@@ -1,0 +1,60 @@
+## For every additional element, why you are adding it
+3 Firewalls:
+    Firewalls are added to protect the infrastructure by controlling incoming and outgoing network traffic. One firewall is placed in front of each server to filter traffic and prevent unauthorized access.
+SSL Certificate:
+    The SSL certificate enables encrypted communication between the user's browser and the web server. This ensures data privacy and security, building trust with users.
+3 Monitoring Clients:
+    Each server has a monitoring client installed to collect performance and log data. This enables proactive issue detection and troubleshooting.
+
+## What are firewalls for
+Firewalls act as a barrier between trusted and untrusted networks. They:
+    Inspect incoming and outgoing traffic based on predefined security rules.
+    Block malicious requests and unauthorized access attempts.
+    Help protect servers from common attacks like DDoS or SQL injection.
+
+## Why is the traffic served over HTTPS
+Encryption: 
+    HTTPS encrypts communication, ensuring sensitive data (e.g., login credentials, payment information) is secure during transmission.
+Authentication: 
+    Validates the identity of the server using an SSL certificate, preventing man-in-the-middle attacks.
+Trust: 
+    HTTPS is a standard for secure websites and builds user trust.
+
+## What monitoring is used for
+Monitoring is used to:
+    Track server health metrics like CPU usage, memory, disk space, and network traffic.
+    Identify application-level issues such as errors, latency, or crashes.
+    Provide real-time alerts for anomalies or failures.
+    Enable analysis of historical trends for capacity planning and optimization.
+
+## How the monitoring tool is collecting data
+Monitoring tools like Sumologic use agents or clients installed on each server to:
+    Collect system logs, application logs, and performance metrics.
+    Send the collected data to a centralized monitoring service over a secure connection.
+    Analyze and visualize the data in dashboards or send alerts based on preconfigured thresholds.
+
+## Explain what to do if you want to monitor your web server QPS
+Enable access logs on your web server (e.g., Nginx or Apache).
+Use the monitoring client to parse and aggregate the logs.
+Define a query in your monitoring tool to calculate the number of requests processed per second.
+Visualize the QPS metric on a real-time dashboard and set alerts for abnormal spikes.
+
+## Why terminating SSL at the load balancer level is an issue
+Unencrypted Traffic:
+    Traffic between the load balancer and the backend servers is unencrypted, exposing sensitive data within the internal network.
+Mitigation:
+    Use end-to-end encryption by installing SSL certificates on both the load balancer and backend servers.
+
+## Why having only one MySQL server capable of accepting writes is an issue
+Single Point of Failure (SPOF): 
+    If the primary MySQL server fails, write operations stop, disrupting the application.
+Mitigation: 
+    Implement database replication with automatic failover, ensuring write operations can continue on a promoted replica.
+
+## Why having servers with all the same components (database, web server and application server) might be a problem
+Resource Contention:
+    Combining the database, web server, and application server on the same machine may lead to performance issues as all components compete for the same resources (CPU, RAM, disk).
+Scalability:
+    Scaling requires duplicating all components, which is inefficient and resource-heavy.
+Mitigation:
+    Use separate servers or virtual machines for each component (e.g., database, application, and web servers) to isolate workloads and improve scalability.
