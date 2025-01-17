@@ -1,0 +1,66 @@
+## For every additional element, why you are adding it
+2 Servers:
+If one server fails, the other can handle the load. So the website doesn't go down immediately.
+
+1 Web Server (Nginx):
+Enhances performance and provides a point of optimization.
+
+1 Application Server:
+Ensures that the sending of content and executing business logic are seperated so it is better performance wise.
+
+1 Load Balancer (HAProxy):
+Distributes traffic between the servers to ensure no single server is overloaded. It also improves the scalability and fault tolerance.
+
+1 Set of Application Files:
+Consistency is maintained across the servers to ensure functionality without any problems.
+
+1 Database (MySQL):
+To easily store all of the data.
+
+## What distribution algorithm your load balancer is configured with and how it works
+It uses the "Round-Robin" algorithm
+It works by distributed sequentially across the all the servers.
+    Request 1 → Server A
+    Request 2 → Server B
+    Request 3 → Server A (cycle repeats).
+
+## Is your load-balancer enabling an Active-Active or Active-Passive setup, explain the difference between both
+Active-Active:
+    Both servers are actively handling requests at the same time. Traffic is distributed evenly across both servers using the load balancer.
+    Advantages: Maximizes resource utilization and provides higher throughput.
+Active-Passive:
+    In contrast, one server would remain idle (passive) and only take over if the active server fails.
+    Advantages: Reliable but less efficient since the passive server is underutilized.
+
+## How a database Primary-Replica (Master-Slave) cluster works
+Primary Database:
+    Handles all write operations and pushes updates to replicas.
+Replica Database:
+    Handles read operations and is synchronized with the primary database. If the primary fails, a replica can be promoted to primary to ensure continuity.
+
+## What is the difference between the Primary node and the Replica node in regard to the application
+Primary Node:
+    Accepts both write and read operations.
+    Is the single source of truth for data updates.
+Replica Node:
+    Only accepts read operations.
+    Receives data updates from the primary, ensuring redundancy and reducing read load on the primary.
+
+## Where are SPOF
+Load Balancer: 
+    If the HAProxy load balancer fails, the entire system becomes inaccessible. A redundant load balancer is needed to eliminate this SPOF.
+Primary Database: 
+    If the primary database fails, write operations are disrupted until a replica is promoted.
+
+## Security issues (no firewall, no HTTPS)
+No Firewall: 
+    Leaves the system exposed to unauthorized access and potential attacks.
+No HTTPS: 
+    Communication between users and the web server is unencrypted, making it vulnerable to interception.
+
+## No monitoring
+Without monitoring tools, the following are untracked:
+    Server performance (CPU, memory, disk usage).
+    Application errors or downtime.
+    Database synchronization issues.
+This leads to reactive instead of proactive maintenance, increasing downtime risks.
